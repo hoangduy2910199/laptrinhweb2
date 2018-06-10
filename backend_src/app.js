@@ -4,15 +4,16 @@ var express = require('express'),
 	cors = require('cors');
 	Product=require('./Model/Product');
 	DB=require('./fn/DB_connect');
-	homeCtr=require('./apiControllers/homeController');
+	router=require('./router/home');
+
 
 var app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/',homeCtr);
 app.use('/public',express.static('./views/public'));
-
+app.use('/handle',express.static('./views/handle'));
+app.use('/',router);
 
 app.listen(3000, function() {
 	console.log('API running on port 3000');
